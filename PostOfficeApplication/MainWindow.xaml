@@ -1,0 +1,194 @@
+﻿<Window x:Class="PostOfficeApplication.MainWindow"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PostOfficeApplication"
+        xmlns:cmmds="clr-namespace:PostOfficeApplication.Controllers"
+        mc:Ignorable="d"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Medium"
+        TextElement.FontSize="14"
+        TextOptions.TextFormattingMode="Ideal" 
+        TextOptions.TextRenderingMode="Auto"        
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="Comic Sans Ms"
+        Title="Почтовое отделение" Height="450" Width="800"
+        WindowStartupLocation="CenterScreen" WindowState="Maximized">
+
+    <Window.CommandBindings>
+        <CommandBinding Command="cmmds:Commands.Exit" Executed="Exit_Exec"/>
+        <CommandBinding Command="cmmds:Commands.About" Executed="About_Exec"/>
+        <CommandBinding Command="cmmds:Commands.ShowSubscriptions" Executed="ShowSubscriptions_Exec"/>
+        <CommandBinding Command="cmmds:Commands.ShowPublications" Executed="ShowPublications_Exec"/>
+        <CommandBinding Command="cmmds:Commands.ShowSubscribers" Executed="ShowSubscribers_Exec"/>
+        <CommandBinding Command="cmmds:Commands.ShowPostmen" Executed="ShowPostmen_Exec"/>
+        <CommandBinding Command="cmmds:Commands.ShowPlots" Executed="ShowPlots_Exec"/>
+        <CommandBinding Command="cmmds:Commands.Subscribe" Executed="Subscribe_Exec"/>
+        <CommandBinding Command="cmmds:Commands.AddNewPublication" Executed="AddNewPublication_Exec"/>
+        <CommandBinding Command="cmmds:Commands.IdentifyPostman" Executed="IdentifyPostman_Exec"/>
+        <CommandBinding Command="cmmds:Commands.IdentifyPublications" Executed="IdentifyPublications_Exec"/>
+        <CommandBinding Command="cmmds:Commands.AverageSubscriptionTerm" Executed="AverageSubscriptionTerm_Exec"/>
+        <CommandBinding Command="cmmds:Commands.AddNewPostman" Executed="AddNewPostman_Exec"/>
+        <CommandBinding Command="cmmds:Commands.LayOffPostman" Executed="LayOffPostman_Exec"/>
+    </Window.CommandBindings>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <!-- Меню -->
+            <RowDefinition Height="50"/>
+            <!-- Панель инструментов -->
+            <RowDefinition Height="50"/>
+            <!-- Рабочая область -->
+            <RowDefinition Height="*"/>
+            <!-- Строка состояния -->
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+        
+        <!-- Меню -->
+        <Menu x:Name="menu" Height="50" FontSize="16"
+              Margin="5, 5, 5, 0"
+              Style="{DynamicResource MaterialDesignMenu}"
+              HorizontalAlignment="Stretch" VerticalAlignment="Top"
+              Background="CadetBlue">
+            <MenuItem Header="Файл" Style="{DynamicResource MaterialDesignMenuItem}">
+                <MenuItem Header="Добавить подписку" Command="cmmds:Commands.Subscribe"
+                          Style="{DynamicResource MaterialDesignMenuItem}">
+                    <MenuItem.Icon>
+                        <Image Source="/Imgs/checked.png" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Добавить издание" Command="cmmds:Commands.AddNewPublication" 
+                          Style="{DynamicResource MaterialDesignMenuItem}">
+                    <MenuItem.Icon>
+                        <Image Source="/Imgs/newspaper.png" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Оформить почтальона" Command="cmmds:Commands.AddNewPostman"
+                          Style="{DynamicResource MaterialDesignMenuItem}">
+                    <MenuItem.Icon>
+                        <Image Source="/Imgs/postman.png" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Уволить почтальона" Command="cmmds:Commands.LayOffPostman"
+                          Style="{DynamicResource MaterialDesignMenuItem}">
+                    <MenuItem.Icon>
+                        <Image Source="/Imgs/postman_stop.png" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <Separator/>
+                <MenuItem Header="Выход" Command="cmmds:Commands.Exit"
+                          Style="{DynamicResource MaterialDesignMenuItem}">
+                    <MenuItem.Icon>
+                        <Image Source="/Imgs/exit.png" />
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
+            
+            <MenuItem Header="Поиск" Style="{DynamicResource MaterialDesignMenuItem}">
+                <MenuItem Header="Найти почтальона..." Command="cmmds:Commands.IdentifyPostman"
+                          ToolTip="Поиск почтальона по адресу подписчика"
+                          Style="{DynamicResource MaterialDesignMenuItem}">
+                    <MenuItem.Icon>
+                        <Image Source="/Imgs/postman.png" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Найти газеты..." Command="cmmds:Commands.IdentifyPublications"
+                          ToolTip="Поиск газет выписываемых гражданином с указанной фамилией, именем, отчеством"
+                          Style="{DynamicResource MaterialDesignMenuItem}">
+                    <MenuItem.Icon>
+                        <Image Source="/Imgs/newspaper.png" />
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
+            
+            <MenuItem Header="Справка" Style="{DynamicResource MaterialDesignMenuItem}">
+                <MenuItem Header="О программе..." Command="cmmds:Commands.About"
+                          Style="{DynamicResource MaterialDesignMenuItem}">
+                    <MenuItem.Icon>
+                        <Image Source="/Imgs/info.png" />
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
+        </Menu>
+        
+        <!-- Панель инструментов -->
+        <ToolBar Background="MintCream" Grid.Row="1"
+                        Style="{DynamicResource MaterialDesignToolBar}">
+            <Button Margin="6, 0, 12, 0" Style="{DynamicResource MaterialDesignRaisedLightButton}"
+                        ToolTip="Все оформленные подписки" Command="cmmds:Commands.ShowSubscriptions">
+                <Image Source="Imgs/subscription.png"  />
+            </Button >
+            <Separator  Style="{DynamicResource MaterialDesignLightSeparator}"/>
+            <Button Margin="6, 0, 12, 0" Style="{DynamicResource MaterialDesignRaisedLightButton}"
+                        ToolTip="Все печатные издания" Command="cmmds:Commands.ShowPublications">
+                <Image Source="Imgs/newspaper.png"  />
+            </Button >
+            <Separator  Style="{DynamicResource MaterialDesignLightSeparator}"/>
+            <Button Margin="6, 0, 12, 0" Style="{DynamicResource MaterialDesignRaisedLightButton}"
+                        ToolTip="Все почтальоны" Command="cmmds:Commands.ShowPostmen">
+                <Image Source="Imgs/postman.png"  />
+            </Button >
+            <Separator  Style="{DynamicResource MaterialDesignLightSeparator}"/>
+            <Button Margin="6, 0, 12, 0" Style="{DynamicResource MaterialDesignRaisedLightButton}"
+                        ToolTip="Все подписчики" Command="cmmds:Commands.ShowSubscribers">
+                <Image Source="Imgs/subscriber.png"  />
+            </Button >
+            <Separator  Style="{DynamicResource MaterialDesignLightSeparator}"/>
+            <Button Margin="6, 0, 12, 0" Style="{DynamicResource MaterialDesignRaisedLightButton}"
+                        ToolTip="Средний срок подписки каждого издания" Command="cmmds:Commands.AverageSubscriptionTerm">
+                <Image Source="Imgs/calendar.png"  />
+            </Button >
+            <Separator  Style="{DynamicResource MaterialDesignLightSeparator}"/>
+            <Button Margin="6, 0, 12, 0" Style="{DynamicResource MaterialDesignRaisedLightButton}"
+                        ToolTip="Все районы и обслуживающие их почтальоны" Command="cmmds:Commands.ShowPlots">
+                <Image Source="Imgs/map.png"  />
+            </Button >
+        </ToolBar>
+        
+        <!-- Рабочая область -->
+        <!--Данные о почтовом отделении подписках почтальонах и подписчиках-->
+        <DataGrid Name="DgPostOffice" Grid.Row="2" 
+                  IsReadOnly="True" AutoGeneratedColumns="DataGrid_AutoGeneratedColunns"
+                  ColumnWidth="*" Background="MintCream"
+                  Style="{DynamicResource MaterialDesignDataGrid}">
+        </DataGrid>
+
+        <!-- Строка состояния -->
+        <DockPanel Grid.Row="3">
+            <StatusBar DockPanel.Dock="Bottom" 
+                       Background="CadetBlue"
+                       BorderBrush="CadetBlue"
+                       BorderThickness="2"
+                       FontSize="16"
+                       FontWeight="Bold"
+                       Margin="5, 0, 5, 5">
+                <StatusBar.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                        </Grid>
+                    </ItemsPanelTemplate>
+                </StatusBar.ItemsPanel>
+                <StatusBarItem HorizontalAlignment="Center">
+                    <TextBlock Name="LblAllPostmen" Style="{DynamicResource MaterialDesignTextBlock}"/>
+                </StatusBarItem>
+                <Separator Grid.Column="1"/>
+                <StatusBarItem Grid.Column="2" HorizontalAlignment="Center">
+                    <TextBlock Name="LblPlotMaxSubscription" Style="{DynamicResource MaterialDesignTextBlock}"/>
+                </StatusBarItem>
+                <Separator Grid.Column="3" />
+                <StatusBarItem Grid.Column="4" HorizontalAlignment="Center">
+                    <TextBlock Name="LblQuantOfTypesPublications" Style="{DynamicResource MaterialDesignTextBlock}"/>
+                </StatusBarItem>
+            </StatusBar>
+        </DockPanel>
+    </Grid>
+</Window>

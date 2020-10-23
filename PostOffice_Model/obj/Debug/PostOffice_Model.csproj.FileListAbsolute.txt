@@ -1,0 +1,5 @@
+C:\Gosh\Шаг\Курсовой проект\PostOffice_Pachkoriya\PostOffice_Pachkoriya\PostOffice_Model\bin\Debug\PostOffice_Model.dll
+C:\Gosh\Шаг\Курсовой проект\PostOffice_Pachkoriya\PostOffice_Pachkoriya\PostOffice_Model\bin\Debug\PostOffice_Model.pdb
+C:\Gosh\Шаг\Курсовой проект\PostOffice_Pachkoriya\PostOffice_Pachkoriya\PostOffice_Model\obj\Debug\PostOffice_Model.csproj.CoreCompileInputs.cache
+C:\Gosh\Шаг\Курсовой проект\PostOffice_Pachkoriya\PostOffice_Pachkoriya\PostOffice_Model\obj\Debug\PostOffice_Model.dll
+C:\Gosh\Шаг\Курсовой проект\PostOffice_Pachkoriya\PostOffice_Pachkoriya\PostOffice_Model\obj\Debug\PostOffice_Model.pdb

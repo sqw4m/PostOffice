@@ -1,0 +1,108 @@
+﻿<Window x:Class="PostOfficeApplication.Views.AddNewPublication"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PostOfficeApplication.Views"
+        xmlns:cmmds="clr-namespace:PostOfficeApplication.Controllers"
+        mc:Ignorable="d"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Medium"
+        TextElement.FontSize="14"
+        TextOptions.TextFormattingMode="Ideal" 
+        TextOptions.TextRenderingMode="Auto"        
+        Background="MintCream"
+        FontFamily="Comic Sans MS"
+        Title="Добавить печатное издание"
+         MaxHeight="400" MaxWidth="500"
+        WindowStartupLocation="CenterScreen">
+    
+    <Window.CommandBindings>
+        <CommandBinding Command="cmmds:AddNewPublicationCommands.Save" Executed="Save_Exec"/>
+        <CommandBinding Command="cmmds:AddNewPublicationCommands.Cancel" Executed="Cancel_Exec"/>
+    </Window.CommandBindings>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <GroupBox Grid.ColumnSpan="2"
+                  Background="MintCream"
+            Margin="10" Padding="10" 
+            Header=" Печатное издание "
+                      Style="{DynamicResource MaterialDesignCardGroupBox}">
+            <Grid Margin="20,5,5,5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Индекс:"
+                   HorizontalAlignment="Left" VerticalAlignment="Center"
+                   Style="{DynamicResource MaterialDesignHeadline5TextBlock}"/>
+                <TextBox Grid.Column="1"
+                 x:Name="TxbIndex" 
+                         Width="150"
+                             VerticalAlignment="Center"
+                             HorizontalAlignment="Stretch"
+                 Style="{DynamicResource MaterialDesignDataGridTextColumnEditingStyle}"/>
+                <TextBlock Grid.Row="1"
+                   Text="Наименование:" 
+                               HorizontalAlignment="Left" VerticalAlignment="Center"
+                   Style="{DynamicResource MaterialDesignHeadline5TextBlock}"/>
+                <TextBox Grid.Column="1"
+                 Grid.Row="1"
+                 x:Name="TxbName"
+                             VerticalAlignment="Center"
+                             HorizontalAlignment="Stretch"
+                         Width="150"
+                 Style="{DynamicResource MaterialDesignDataGridTextColumnEditingStyle}"/>
+                <TextBlock Grid.Row="2"
+                 Text="Цена:"
+                               HorizontalAlignment="Left" VerticalAlignment="Center"
+                 Style="{DynamicResource MaterialDesignHeadline5TextBlock}"/>
+                <TextBox Grid.Column="1"
+                 Grid.Row="2"
+                 x:Name="TxbPrice"
+                             VerticalAlignment="Center"
+                             HorizontalAlignment="Stretch"
+                         Width="150"
+                 Style="{DynamicResource MaterialDesignDataGridTextColumnEditingStyle}"/>
+                <TextBlock Grid.Row="3"
+                 Text="Тип:"
+                               HorizontalAlignment="Left" VerticalAlignment="Center"
+                 Style="{DynamicResource MaterialDesignHeadline5TextBlock}"/>
+                <ComboBox Grid.Column="1"
+                 Grid.Row="3"
+                 x:Name="CbxType"
+                             VerticalAlignment="Center"
+                             HorizontalAlignment="Stretch"
+                          Width="150"
+                  HorizontalContentAlignment="Center"
+                 Style="{DynamicResource MaterialDesignComboBox}"/>
+            </Grid>
+        </GroupBox>
+        <Button Grid.Row="1"
+                Content="Сохранить" 
+                Margin="15,5,15,15" 
+                Style="{DynamicResource MaterialDesignFlatLightBgButton}"
+                Command="cmmds:AddNewPublicationCommands.Save"/>
+        <Button Grid.Column="1"
+                Grid.Row="1"
+                Content="Отмена" 
+                Margin="15,5,15,15" 
+                Style="{DynamicResource MaterialDesignFlatLightBgButton}"
+                Command="cmmds:AddNewPublicationCommands.Cancel"/>
+    </Grid>
+</Window>
